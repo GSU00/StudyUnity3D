@@ -47,6 +47,7 @@ public class BoardBar : MonoBehaviour
 
     public void PushDonut(GameObject donut)
     {
+        HanoiTower.moveCount++;
         donut.transform.position = transform.position + Vector3.up * 5f;
 
         barStack.Push(donut);
@@ -54,8 +55,15 @@ public class BoardBar : MonoBehaviour
 
     public GameObject PopDonut()
     {
-        GameObject donut = barStack.Pop();
+        if (barStack.Count > 0)
+        {
+            HanoiTower.currBar = this;
+            HanoiTower.isSelected = true;
+            GameObject donut = barStack.Pop(); // Stack¿¡¼­ GameObject¸¦ ²¨³»´Â ±â´É
 
-        return donut;
+            return donut; // ²¨³½ µµ³ÓÀ» ¹ÝÈ¯
+        }
+
+        return null;
     }
 }
